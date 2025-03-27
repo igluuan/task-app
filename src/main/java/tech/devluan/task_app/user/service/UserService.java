@@ -12,6 +12,7 @@ import tech.devluan.task_app.user.model.User;
 import tech.devluan.task_app.user.model.dto.login.LoginRequest;
 import tech.devluan.task_app.user.model.dto.login.LoginResponse;
 import tech.devluan.task_app.user.model.dto.register.CreationUserDTO;
+import tech.devluan.task_app.user.model.dto.register.ResponseUserDTO;
 import tech.devluan.task_app.user.repository.UserRepository;
 import tech.devluan.task_app.user.service.mapper.UserMapper;
 
@@ -26,11 +27,11 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final JwtEncoder jwtEncoder;
 
-    public CreationUserDTO createUser(CreationUserDTO creationUserDTO) {
+    public ResponseUserDTO createUser(CreationUserDTO creationUserDTO) {
         User user = userMapper.toEntity(creationUserDTO);
         user.setPassword(passwordEncoder.encode(creationUserDTO.password()));
         userRepository.save(user);
-        return userMapper.toDTO(user);
+        return userMapper.toResponseDTO(user);
     }
 
     public LoginResponse login(LoginRequest loginRequest) {

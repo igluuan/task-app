@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import tech.devluan.task_app.user.model.dto.login.LoginRequest;
 import tech.devluan.task_app.user.model.dto.login.LoginResponse;
 import tech.devluan.task_app.user.model.dto.register.CreationUserDTO;
+import tech.devluan.task_app.user.model.dto.register.ResponseUserDTO;
 import tech.devluan.task_app.user.service.UserService;
 
 @RestController
@@ -21,7 +22,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/newuser")
-    public ResponseEntity<CreationUserDTO> registerUser(@Valid @RequestBody CreationUserDTO creationUserDTO) {
+    public ResponseEntity<ResponseUserDTO> registerUser(@Valid @RequestBody CreationUserDTO creationUserDTO) {
         return ResponseEntity.ok(userService.createUser(creationUserDTO));
     }
 

@@ -14,6 +14,7 @@ import tech.devluan.task_app.user.model.User;
 import tech.devluan.task_app.user.model.dto.login.LoginRequest;
 import tech.devluan.task_app.user.model.dto.login.LoginResponse;
 import tech.devluan.task_app.user.model.dto.register.CreationUserDTO;
+import tech.devluan.task_app.user.model.dto.register.ResponseUserDTO;
 import tech.devluan.task_app.user.repository.UserRepository;
 import tech.devluan.task_app.user.service.mapper.UserMapper;
 
@@ -45,6 +46,7 @@ class UserServiceTest {
     private UserService userService;
 
     private CreationUserDTO creationUserDTO;
+    private ResponseUserDTO responseUserDTO;
     private User user;
     private LoginRequest loginRequest;
     private static final String TEST_EMAIL = "test@example.com";
@@ -57,6 +59,12 @@ class UserServiceTest {
             "John Doe",
             "test@example.com",
             "password123"
+        );
+
+        responseUserDTO = new ResponseUserDTO(
+            UUID.randomUUID(),
+            "John Doe",
+            "test@example.com"
         );
 
         user = new User();
@@ -73,10 +81,10 @@ class UserServiceTest {
         // Arrange
         when(userMapper.toEntity(creationUserDTO)).thenReturn(user);
         when(userRepository.save(any(User.class))).thenReturn(user);
-        when(userMapper.toDTO(user)).thenReturn(creationUserDTO);
+        when(userMapper.toResponseDTO(user)).thenReturn(responseUserDTO);
 
         // Act
-        CreationUserDTO result = userService.createUser(creationUserDTO);
+        ResponseUserDTO result = userService.createUser(creationUserDTO);
 
         // Assert
         assertThat(result).isNotNull();
@@ -89,7 +97,7 @@ class UserServiceTest {
         // Arrange
         when(userMapper.toEntity(creationUserDTO)).thenReturn(user);
         when(userRepository.save(any(User.class))).thenReturn(user);
-        when(userMapper.toDTO(user)).thenReturn(creationUserDTO);
+        when(userMapper.toResponseDTO(user)).thenReturn(responseUserDTO);
 
         // Act
         userService.createUser(creationUserDTO);

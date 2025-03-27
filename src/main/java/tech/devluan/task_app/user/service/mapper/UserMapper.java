@@ -4,8 +4,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
-    import tech.devluan.task_app.user.model.User;
+import tech.devluan.task_app.user.model.User;
 import tech.devluan.task_app.user.model.dto.register.CreationUserDTO;
+import tech.devluan.task_app.user.model.dto.register.ResponseUserDTO;
 
 @Mapper(componentModel = "spring", uses = {})
 public interface UserMapper {
@@ -15,6 +16,7 @@ public interface UserMapper {
 
     CreationUserDTO toDTO(User user);
 
+    ResponseUserDTO toResponseDTO(User user);
     @Mapping(target = "id", ignore = true)
     void updateEntity(@MappingTarget User user, CreationUserDTO userDTO);
 }

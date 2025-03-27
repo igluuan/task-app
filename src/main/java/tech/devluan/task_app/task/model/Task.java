@@ -1,8 +1,8 @@
-package tech.devluan.task_app.user.model;
+package tech.devluan.task_app.task.model;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
-import jakarta.persistence.Column;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,20 +12,20 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 @Entity
-@Table(name = "users")
+@Table(name = "tasks")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class Task {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
-    private String name;
-    @Column(unique = true)
-    private String email;
-    private String password;
+    private String userId;
+    private String title;
+    private String description;
     private LocalDateTime createdAt;
+    private LocalDateTime determinedTime;
+    
 }
